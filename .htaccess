@@ -1,0 +1,61 @@
+# ════════════════════════════════════════════
+#  Security configuration for MailerApp
+# ════════════════════════════════════════════
+
+# Protect sensitive files
+<FilesMatch "\.(php|json|lock|env)$">
+    <IfVersion >= 2.4>
+        Require all denied
+    </IfVersion>
+    <IfVersion < 2.4>
+        Deny from all
+    </IfVersion>
+</FilesMatch>
+
+# Allow only specific PHP files
+<FilesMatch "^(index|login|register|logout|mailer|send|history|dashboard|users|all_mails|logs|telegram_bot)\.php$">
+    <IfVersion >= 2.4>
+        Require all granted
+    </IfVersion>
+    <IfVersion < 2.4>
+        Allow from all
+    </IfVersion>
+</FilesMatch>
+
+# Protect config files
+<FilesMatch "^(auth|config|csv_helper|sidebar)\.php$">
+    <IfVersion >= 2.4>
+        Require all denied
+    </IfVersion>
+    <IfVersion < 2.4>
+        Deny from all
+    </IfVersion>
+</FilesMatch>
+
+# Folder protection
+<DirectoryMatch "^/(data|uploads|logs|vendor|src)">
+    <IfVersion >= 2.4>
+        Require all denied
+    </IfVersion>
+    <IfVersion < 2.4>
+        Deny from all
+    </IfVersion>
+</DirectoryMatch>
+
+# Enable mod_rewrite
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+</IfModule>
+
+# Disable directory listing
+<IfModule mod_autoindex.c>
+    IndexIgnore *
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>

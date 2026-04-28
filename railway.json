@@ -1,0 +1,7 @@
+{
+  "buildCommand": "composer install",
+  "startCommand": "php -S 0.0.0.0:${PORT:-8000}",
+  "enviromentVariables": {
+    "PORT": "8000"
+  }
+}

@@ -1,0 +1,17 @@
+{
+    "name": "levuri/maileeer",
+    "autoload": {
+        "psr-4": {
+            "Levuri\\Maileeer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yuri",
+            "email": "yurimkrtchyan08@mail.ru"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^7.0"
+    }
+}
