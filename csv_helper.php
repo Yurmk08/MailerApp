@@ -2,6 +2,7 @@
 // ════════════════════════════════════════════
 //  csv_helper.php  –  Data layer (CSV-based)
 // ════════════════════════════════════════════
+require_once __DIR__ . '/boot.php';
 require_once __DIR__ . '/config.php';
 
 // ── Generic CSV helpers ───────────────────────

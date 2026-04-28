@@ -2,6 +2,7 @@
 // ════════════════════════════════════════════
 //  auth.php  –  Session & auth helpers
 // ════════════════════════════════════════════
+require_once __DIR__ . '/boot.php';
 require_once __DIR__ . '/config.php';
 
 if (session_status() === PHP_SESSION_NONE) {
