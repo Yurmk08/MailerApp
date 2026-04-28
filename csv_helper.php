@@ -11,9 +11,9 @@ function csvRead(string $file): array {
     if (!file_exists($file)) return [];
     $rows = [];
     if (($fh = fopen($file, 'r')) === false) return [];
-    $headers = fgetcsv($fh);
+    $headers = fgetcsv($fh, 0, ',', '"', '\\');
     if (!$headers) { fclose($fh); return []; }
-    while (($row = fgetcsv($fh)) !== false) {
+    while (($row = fgetcsv($fh, 0, ',', '"', '\\')) !== false) {
         if (count($row) === count($headers))
             $rows[] = array_combine($headers, $row);
     }
@@ -23,16 +23,18 @@ function csvRead(string $file): array {
 
 function csvWrite(string $file, array $rows, array $headers): void {
     $fh = fopen($file, 'w');
-    fputcsv($fh, $headers);
-    foreach ($rows as $r) fputcsv($fh, array_values($r));
+    fputcsv($fh, $headers, ',', '"', '\\');
+    foreach ($rows as $r) {
+        fputcsv($fh, array_values($r), ',', '"', '\\');
+    }
     fclose($fh);
 }
 
 function csvAppend(string $file, array $row, array $headers): void {
     $new = !file_exists($file) || filesize($file) === 0;
     $fh  = fopen($file, 'a');
-    if ($new) fputcsv($fh, $headers);
-    fputcsv($fh, array_values($row));
+    if ($new) fputcsv($fh, $headers, ',', '"', '\\');
+    fputcsv($fh, array_values($row), ',', '"', '\\');
     fclose($fh);
 }
 

@@ -3,8 +3,7 @@
 .env.local
 .env.*.local
 
-# Configuration with credentials
-config.php
+# Configuration (now using .env variables)
 
 # Sensitive data
 data/
